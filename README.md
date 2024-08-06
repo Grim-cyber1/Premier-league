@@ -61,25 +61,25 @@ for team in df.home_team_name.unique():
     counts_home = df_home.value_counts('winner')
     counts_away = df_away.value_counts('winner')
     
-    # How many times this team win at home?
+
     home_winner = 0 if 'home_winner' not in counts_home else counts_home['home_winner']
-    # How many times this team lost at home?
+
     away_winner = 0 if 'away_winner' not in counts_home else counts_home['away_winner']
-    # How many times this team draw at home?
+
     home_draw = 0 if 'draw' not in counts_home else counts_home['draw']
     
-    # How many times this team win away?
+
     win_away = 0 if 'away_winner' not in counts_away else counts_away['away_winner']
-    # How many times this team lost away?
+
     lost_away = 0 if 'home_winner' not in counts_away else counts_away['home_winner']
-    # How many times this team draw away?
+
     away_draw = 0 if 'draw' not in counts_away else counts_away['draw']
     
-    # Goals for
+
     GF = df_home.home_team_goals.sum() + df_away.away_team_goals.sum()
-    # Goals Against
+
     GA = df_home.away_team_goals.sum() + df_away.home_team_goals.sum()
-    # Gols Difference
+
     GD = GF - GA
     
     d[team] = {
@@ -118,6 +118,9 @@ df_rank = (df_ranked.style
 df_rank
 
 fig = px.pie(df.value_counts("winner").reset_index(), values='count', names='winner', title='Checkin relation for win', hole=.2)
+
 fig.update_traces(textposition='inside', textinfo='percent+label')
+
 fig.update_layout(showlegend=False)
+
 fig.show()
